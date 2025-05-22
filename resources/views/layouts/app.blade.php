@@ -12,7 +12,7 @@
 
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
+
     <!-- Font Awesome -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 
@@ -263,6 +263,7 @@
     </style>
 
     @stack('styles')
+    @livewireStyles
 </head>
 <body>
     <div id="app">
@@ -328,10 +329,10 @@
     <!-- Bootstrap and Popper.js -->
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-    
+
     <!-- Dragula for drag and drop -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dragula/3.7.3/dragula.min.js"></script>
-    
+
     <!-- Laravel Echo and Pusher for real-time updates -->
     <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/laravel-echo@1.15.0/dist/echo.iife.js"></script>
@@ -392,15 +393,15 @@
                             You've been assigned the task: ${e.title}
                         </div>
                     `;
-                    
-                    const toastContainer = document.querySelector('.toast-container') || 
+
+                    const toastContainer = document.querySelector('.toast-container') ||
                         (() => {
                             const container = document.createElement('div');
                             container.classList.add('toast-container', 'position-fixed', 'bottom-0', 'end-0', 'p-3');
                             document.body.appendChild(container);
                             return container;
                         })();
-                    
+
                     toastContainer.appendChild(notification);
                     const toast = new bootstrap.Toast(notification);
                     toast.show();
@@ -409,5 +410,6 @@
     </script>
 
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>

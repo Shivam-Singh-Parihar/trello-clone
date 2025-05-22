@@ -46,17 +46,17 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/teams/{team}/members', [TeamController::class, 'removeUser'])->name('teams.remove-user');
 });
 
-// Project Routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('/teams/{team}/projects/create', [ProjectController::class, 'create'])->name('projects.create');
-    Route::post('/teams/{team}/projects', [ProjectController::class, 'store'])->name('projects.store');
+    // Project Routes
+    Route::middleware(['auth'])->group(function () {
+        Route::get('/teams/{team}/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+        Route::post('/teams/{team}/projects', [ProjectController::class, 'store'])->name('projects.store');
 
-    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
-    Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
-    Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
-    Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
-});
-
+        Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
+        Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+        Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+        Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    });
+    
 // List Routes
 Route::middleware(['auth'])->group(function () {
     Route::post('/projects/{project}/lists', [TaskListController::class, 'store'])->name('lists.store');

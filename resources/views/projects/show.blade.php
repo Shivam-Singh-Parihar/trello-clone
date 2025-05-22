@@ -96,7 +96,7 @@
                             <button class="btn btn-sm btn-link edit-task-btn" data-task-id="{{ $task->id }}">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
-                            <a href="{{ route('tasks.show', $task) }}" class="stretched-link view-task-link"></a>
+                            <a href="#" class="stretched-link view-task-link"></a>
                         </div>
                     @endforeach
 
@@ -167,23 +167,17 @@
                     <h5 class="modal-title">Task Details</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" id="taskDetailsContent">
-                    <div class="text-center p-4">
-                        <div class="spinner-border text-primary" role="status">
-                            <span class="visually-hidden">Loading...</span>
-                        </div>
-                        <p class="mt-2">Loading task details...</p>
-                    </div>
-                </div>
+
+                     @livewire('task-modal')
+
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <a href="#" id="editTaskBtn" class="btn btn-primary">
-                        <i class="fas fa-edit me-1"></i> Edit Task
-                    </a>
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="editTaskBtn">Edit Task</button>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Task Details Modal -->
 
     <!-- Edit Task Modal -->
     <div class="modal fade" id="editTaskModal" tabindex="-1" aria-hidden="true">
@@ -442,32 +436,16 @@
                 if (e.target.closest('.edit-task-btn')) {
                     return;
                 }
-
+                Livewire.dispatch('show-task-modal',{ taskId: taskId });
                 e.preventDefault();
 
                 // Show the modal first
                 taskDetailsModal.show();
 
-                // Fetch task details
-                fetch(`/tasks/${taskId}`, {
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                })
-                .then(response => response.text())
-                .then(html => {
-                    // Load the content into the modal
-                    taskDetailsContent.innerHTML = html;
 
-                    // Update the edit button link
-                    editTaskBtn.href = `/tasks/${taskId}/edit`;
-                })
-                .catch(error => {
-                    console.error('Error loading task details:', error);
-                    taskDetailsContent.innerHTML =
-                        '<div class="alert alert-danger">Error loading task details. Please try again.</div>';
-                });
-            });
+
+
+        });
         });
 
 
